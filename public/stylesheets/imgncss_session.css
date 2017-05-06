@@ -1344,3 +1344,36 @@ textarea{
     font-weight: 600;
     margin-left:10%; 
     }
+
+
+
+.SliderRGB {
+
+     width: 200px;
+     height: 280.5px;
+     border: 2px slategray;
+}
+
+#displayRGB {
+
+    width: 65%;
+    height: 100px;
+    background: #000;
+    margin-top: 10px;
+    border: 3px solid #000;
+}
+
+.SliderCMYK {
+
+     width: 200px;
+     height: 280.5px;
+     border: 2px slategray;
+}
+
+#displayCMYK {
+    width: 65%;
+    height: 100px;
+    background: #ffffff;
+    margin-top: 10px;
+    border: 3px solid #000;
+}

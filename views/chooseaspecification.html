@@ -60,6 +60,59 @@
                     <option value="psd">PSD</option>
                     <option value="tiff">TIFF</option>
                 </select><br>
+                <!-- div con los sliders RGB-->
+                       <div class="SliderRGB">
+                            <div style="width: 30px; float: left;">R:</div>
+                                <input type="range" min="0" max="255" step="1" id="red" value="0" onchange="sliderChange(this.value, 'sliderStatus')">
+                                  value = <span id="sliderStatus">0</span>
+                                    <br>
+                                    <div style="width: 30px; float: left;">G:</div>
+                                    <input type="range" min="0" max="255" step="1" id="green" value="0" onchange="sliderChange(this.value, 'sliderStatus2')">
+                                    value = <span id="sliderStatus2">0</span>
+                                    <br>
+                                    <div style="width: 30px; float: left;">B:</div>
+                                    <input type="range" min="0" max="255" step="1" id="blue" value="0" onchange="sliderChange(this.value, 'sliderStatus3')">
+                                    value = <span id="sliderStatus3">0</span>
+
+                        <div id="displayRGB"></div>
+
+                         Hex = <span id=valHex>#000000</span> 
+                    </div>
+
+
+        <!-- div con los Silders CMYK-->
+
+         <div class="SliderCMYK">
+        <div style="width: 30px; float: left;">C:</div>
+        <input type="range" min="0" max="100" step="1" id="cyan" value="0" onchange="sliderChangeCMYK(this.value, 'sliderStatus4')">
+        value = <span id="sliderStatus4">0</span>
+        <br>
+        <br>
+        <div style="width: 30px; float: left;">M:</div>
+        <input type="range" min="0" max="100" step="1" id="magenta" value="0" onchange="sliderChangeCMYK(this.value, 'sliderStatus5')">
+        value = <span id="sliderStatus5">0</span>
+        <br>
+        <br>
+        <div style="width: 30px; float: left;">Y:</div>
+        <input type="range" min="0" max="100" step="1" id="yellow" value="0" onchange="sliderChangeCMYK(this.value, 'sliderStatus6')">
+        value = <span id="sliderStatus6">0</span>
+        <br>
+        <br>
+        <div style="width: 30px; float: left;">K:</div>
+        <input type="range" min="0" max="100" step="1" id="black" value="0" onchange="sliderChangeCMYK(this.value, 'sliderStatus7')">
+        value = <span id="sliderStatus7">0</span>
+        <br>
+        <br>
+        <div id="displayCMYK"></div>
+
+        value = <span id="valCMYK">CMYK (0%,0%,0%,0%)</span>
+
+    </div>
+
+
+
+
+
                 <label for="modo">Modo Color</label><br>
                 <select id="colormode" name="colormode">
                     <option value="rgb">RGB</option>
@@ -68,7 +121,6 @@
                 <label for="fondo">Fondo</label><br>
                 <select id="background" name="background">
                     <option value="blanco">BLANCO</option>
-                    <option value="negro">NEGRO</option>
                     <option value="color">COLOR</option>
                     <option id="sin_fondo" value="sin_fondo" disabled>SIN FONDO</option>
                 </select>
