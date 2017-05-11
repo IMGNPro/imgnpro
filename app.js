@@ -431,17 +431,13 @@ passport.use('signup', new LocalStrategy({
           {
             newUser.disabled = false;
           }
-          
-
- 
           // save the user
           newUser.save(function(err) {
             if (err){
               console.log('No se pudo guardar el usuario: '+err);  
               throw err;  
             }
-            console.log('Se registró correctamente el usuario');
-                
+            console.log('Se registró correctamente el usuario');      
             var mailOptions = {
                 from: '"Welcome" <welcome@mail-imgnpro.com>', // sender address
                 to: username, // list of receivers
@@ -450,20 +446,15 @@ passport.use('signup', new LocalStrategy({
                 //html: '<a href="www.imgnpro.com/confirmuser"</a>' // html body
                 html: '<html>Hi '+ newUser.userlongname  +  '.<br><b>To confirm your account please click the link below</b><br><a href="' + req.headers.host + '/confirmuser/' + newUser._id+'">Confirm acccount</a><br>' + req.headers.host + '/confirmuser/' + newUser._id + '</html>' // html body
             };
-            console.log(mailOptions);
             mailer.sendEmail(mailOptions);
-            //send mail with defined transport object
-            // transporter.sendMail(mailOptions, function(error, info){
-            //     if(error){
-            //         return console.log(error);
-            //     }
-            //     console.log('Message sent: ' + info.response);
-            // });
-            createfreespec(newUser._id,function(err,message_spec){
-              console.log(message_spec);
+            if (username === 'demoimgnpro'){
+              createfreespec(newUser._id,function(err,message_spec){
+                return done(null, newUser, {message:'Se registró correctamente el usuario'});
+              }); 
+            }
+            else{
               return done(null, newUser, {message:'Se registró correctamente el usuario'});
-            }); 
-            
+            }
           }
           );
         }
