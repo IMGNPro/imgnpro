@@ -1,6 +1,8 @@
  
  $(document).ready(function(){
 
+     
+
                 var strspecname = localStorage.getItem("specname");
                 var v_typespec = localStorage.getItem("typespec");
                 var nDPI = localStorage.getItem("DPI");
@@ -91,7 +93,28 @@
                         $('#colormode').prop("value", 'rgb');
                        }
                   
-                });
+            });
+            
+   
+   
+            $("#colormode").change(function() {
+                   
+                    var div1 = document.getElementById('SliderRGB');
+       var div2 = document.getElementById('SliderCMYK');
+      
+                   
+                   
+                    if($("#colormode option:selected").text() ==='RGB'){
+                  div2.style.display = 'none';
+                  div1.style.display = 'block';
+                }
+
+                 if($("#colormode option:selected").text() ==='CMYK'){
+          div2.style.display = 'block';
+          div1.style.display = 'none';
+                 }
+                  
+                }); 
 
               function desactForm(formName){
                     $('#div_msgDemo').show();

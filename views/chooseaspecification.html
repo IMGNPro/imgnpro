@@ -61,7 +61,7 @@
                     <option value="tiff">TIFF</option>
                 </select><br>
                 <!-- div con los sliders RGB-->
-                       <div class="SliderRGB">
+                       <div class="SliderRGB" id="SliderRGB">
                             <div style="width: 30px; float: left;">R:</div>
                                 <input type="range" min="0" max="255" step="1" id="red" value="0" onchange="sliderChange(this.value, 'sliderStatus')">
                                   value = <span id="sliderStatus">0</span>
@@ -82,7 +82,7 @@
 
         <!-- div con los Silders CMYK-->
 
-         <div class="SliderCMYK">
+         <div class="SliderCMYK" id="SliderCMYK">
         <div style="width: 30px; float: left;">C:</div>
         <input type="range" min="0" max="100" step="1" id="cyan" value="0" onchange="sliderChangeCMYK(this.value, 'sliderStatus4')">
         value = <span id="sliderStatus4">0</span>
