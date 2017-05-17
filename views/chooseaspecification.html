@@ -64,19 +64,19 @@
                        <div class="SliderRGB" id="SliderRGB">
                             <div style="width: 30px; float: left;">R:</div>
                                 <input type="range" min="0" max="255" step="1" id="red" value="0" onchange="sliderChange(this.value, 'sliderStatus')">
-                                  value = <span id="sliderStatus">0</span>
+                                  Red = <span id="sliderStatus">0</span>
                                     <br>
                                     <div style="width: 30px; float: left;">G:</div>
                                     <input type="range" min="0" max="255" step="1" id="green" value="0" onchange="sliderChange(this.value, 'sliderStatus2')">
-                                    value = <span id="sliderStatus2">0</span>
+                                    Green = <span id="sliderStatus2">0</span>
                                     <br>
                                     <div style="width: 30px; float: left;">B:</div>
                                     <input type="range" min="0" max="255" step="1" id="blue" value="0" onchange="sliderChange(this.value, 'sliderStatus3')">
-                                    value = <span id="sliderStatus3">0</span>
+                                    Blue = <span id="sliderStatus3">0</span>
 
                         <div id="displayRGB"></div>
 
-                         Hex = <span id=valHex>#000000</span> 
+                         Codigo Hex = <span id=valHex>#000000</span> 
                     </div>
 
 
@@ -85,27 +85,27 @@
          <div class="SliderCMYK" id="SliderCMYK">
         <div style="width: 30px; float: left;">C:</div>
         <input type="range" min="0" max="100" step="1" id="cyan" value="0" onchange="sliderChangeCMYK(this.value, 'sliderStatus4')">
-        value = <span id="sliderStatus4">0</span>
+        Cyan = <span id="sliderStatus4">0</span><span>%</span>
         <br>
         <br>
         <div style="width: 30px; float: left;">M:</div>
         <input type="range" min="0" max="100" step="1" id="magenta" value="0" onchange="sliderChangeCMYK(this.value, 'sliderStatus5')">
-        value = <span id="sliderStatus5">0</span>
+        Mageta = <span id="sliderStatus5">0</span> <span>%</span>
         <br>
         <br>
         <div style="width: 30px; float: left;">Y:</div>
         <input type="range" min="0" max="100" step="1" id="yellow" value="0" onchange="sliderChangeCMYK(this.value, 'sliderStatus6')">
-        value = <span id="sliderStatus6">0</span>
+        Yellow = <span id="sliderStatus6">0</span><span>%</span>
         <br>
         <br>
         <div style="width: 30px; float: left;">K:</div>
         <input type="range" min="0" max="100" step="1" id="black" value="0" onchange="sliderChangeCMYK(this.value, 'sliderStatus7')">
-        value = <span id="sliderStatus7">0</span>
+        Black = <span id="sliderStatus7">0</span><span>%</span>
         <br>
         <br>
         <div id="displayCMYK"></div>
 
-        value = <span id="valCMYK">CMYK (0%,0%,0%,0%)</span>
+        Porcentaje de colores  = <span id="valCMYK">CMYK (0%,0%,0%,0%)</span>
 
     </div>
 
@@ -118,14 +118,14 @@
                     <option value="rgb">RGB</option>
                     <option id="mode_cmyk" value="cmyk">CMYK</option>
                 </select><br>
-                <label for="fondo">Fondo</label><br>
+               <!-- <label for="fondo">Fondo</label><br>
                 <select id="background" name="background">
                     <option value="blanco">BLANCO</option>
                     <option value="color">COLOR</option>
                     <option id="sin_fondo" value="sin_fondo" disabled>SIN FONDO</option>
                 </select>
                 <input id="colorselect" type="color" name="backgrndcolor" value="#FFFFFF" disabled>
-                <br>
+                <br>  -->
                 <label for="dpi">DPI</label><br>
                 <input id="depeis" type="text" name="DPI" value="0" maxlength="5" disabled><label for="dpi">dpi</label>
                 <input id="chkalgnnone" class="checkcheck" type="checkbox" name="dpinone" value="none"  checked onclick="javascript:desactAllNext();"><span class="postcheck">Sin Cambios</span>

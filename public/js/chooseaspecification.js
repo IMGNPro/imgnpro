@@ -45,6 +45,16 @@
                           localStorage.setItem("dpinone","");
                           localStorage.removeItem("DPI");
 
+                          //envio de los valores de los Sliders
+
+                          if(colormodeSelected == 0){
+
+                             localStorage.setItem("RGB",RGB);
+                          }else{
+                            localStorage.setItem("CMYK",CMYK);
+                          }
+
+
                         
                           if($('input:checkbox[name=dpinone]').is(":checked")) {
                             localStorage.setItem("dpinone", $('input:checkbox[name=dpinone]').val());
@@ -96,22 +106,26 @@
             });
             
    
-   
+   //mostar el div donde esta los sliders 
+            var colormodeSelected;
             $("#colormode").change(function() {
                    
-                    var div1 = document.getElementById('SliderRGB');
-       var div2 = document.getElementById('SliderCMYK');
-      
+                  var div1 = document.getElementById('SliderRGB');
+                  var div2 = document.getElementById('SliderCMYK');
+                  
                    
                    
-                    if($("#colormode option:selected").text() ==='RGB'){
+                 if($("#colormode option:selected").text() ==='RGB'){
                   div2.style.display = 'none';
                   div1.style.display = 'block';
+                  colormodeSelected = 0;
                 }
 
                  if($("#colormode option:selected").text() ==='CMYK'){
           div2.style.display = 'block';
           div1.style.display = 'none';
+          colormodeSelected = 1;
+
                  }
                   
                 }); 
@@ -125,6 +139,14 @@
 
 var input = document.querySelectorAll("input");
 
+var RGB;
+var Red;
+var Green;
+var Blue;
+
+
+
+
 for(var i = 0; i < input.length; i++) {
 
     input[i].addEventListener("input", function() {
@@ -133,8 +155,16 @@ for(var i = 0; i < input.length; i++) {
             green = document.getElementById("green").value,
             blue = document.getElementById("blue").value;
 
+       
+
         var display = document.getElementById("display");
         displayRGB.style.background = "rgb(" + red + ", " + green + ", " + blue + ")";
+        
+      Red = red;
+      Green = green;
+      Blue = blue;   
+      RGB = '{"r":"'+Red+'","g":"'+Green+'","b":"'+Blue+'"}';
+
     });
 }
 sliderChange(document.getElementById('red').value, 'sliderStatus');
@@ -146,6 +176,15 @@ sliderChange(document.getElementById('blue').value, 'sliderStatus3');
 
 // Script de los Sliders CMYK para cambiar el display de color
 var input = document.querySelectorAll("input");
+
+
+var CMYK;
+var Cyan;
+var Magenta;
+var Yellow;
+var Black;
+
+
 
 for(var i = 0; i < input.length; i++) {
 
@@ -170,6 +209,14 @@ for(var i = 0; i < input.length; i++) {
 		r = Math.round( r * 255 );
 		g = Math.round( g * 255 );
 		b = Math.round( b * 255 );
+
+
+        Cyan = cyan;
+        Magenta = magenta;
+        Yellow = yellow;
+        Black = black;
+        CMYK = '{"c":"'+Cyan+'","m":"'+Magenta+'","y":"'+Yellow+'","k":"'+Black+'"}';
+
 
        displayCMYK.style.background = "rgb(" + r + ", " + g + ", " + b + ")";
     });

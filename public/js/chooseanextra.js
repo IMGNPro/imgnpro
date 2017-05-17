@@ -23,6 +23,10 @@
                     var background = localStorage.getItem("background");
                     var DPI = localStorage.getItem("DPI");
                     var measuresize = localStorage.getItem("measuresize");
+
+                    //recuperar los valores de los colores 
+                    var RGB = localStorage.getItem("RGB");
+                    var CMYK = localStorage.getItem("CMYK");
                     
                     var imagesize = localStorage.getItem('imagesize');
                     var sizenone = localStorage.getItem("sizenone");
@@ -58,6 +62,8 @@
                         format:format,
                         colormode:colormode,
                         background:background,
+                        RGB:RGB,
+                        CMYK:CMYK,
                         backgrndcolor:localStorage.getItem("backgrndcolor"),
                         dpi:DPI,
                         dpinone:localStorage.getItem("dpinone"),
