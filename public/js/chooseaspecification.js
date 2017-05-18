@@ -163,7 +163,7 @@ for(var i = 0; i < input.length; i++) {
       Red = red;
       Green = green;
       Blue = blue;   
-      RGB = '{"r":"'+Red+'","g":"'+Green+'","b":"'+Blue+'"}';
+      RGB = "{r:"+Red+",g:"+Green+",b:"+Blue+"}";
 
     });
 }
@@ -215,7 +215,7 @@ for(var i = 0; i < input.length; i++) {
         Magenta = magenta;
         Yellow = yellow;
         Black = black;
-        CMYK = '{"c":"'+Cyan+'","m":"'+Magenta+'","y":"'+Yellow+'","k":"'+Black+'"}';
+        CMYK = "{c:"+Cyan+",m:"+Magenta+",y:"+Yellow+",k:"+Black+"}";
 
 
        displayCMYK.style.background = "rgb(" + r + ", " + g + ", " + b + ")";
