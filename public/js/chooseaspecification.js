@@ -1,8 +1,5 @@
  
  $(document).ready(function(){
-
-     
-
                 var strspecname = localStorage.getItem("specname");
                 var v_typespec = localStorage.getItem("typespec");
                 var nDPI = localStorage.getItem("DPI");
@@ -101,6 +98,7 @@
                         localStorage.removeItem('clippingpath');
                         $('#mode_cmyk').prop("disabled", true);
                         $('#colormode').prop("value", 'rgb');
+                        changeColorMode();
                        }
                   
             });
@@ -109,32 +107,28 @@
    //mostar el div donde esta los sliders 
             var colormodeSelected;
             $("#colormode").change(function() {
-                   
-                  var div1 = document.getElementById('SliderRGB');
-                  var div2 = document.getElementById('SliderCMYK');
-                  
-                   
-                   
-                 if($("#colormode option:selected").text() ==='RGB'){
+                 changeColorMode();
+            }); 
+
+            function desactForm(formName){
+                    $('#div_msgDemo').show();
+                    $('#specname').prop('disabled',true);
+            } 
+
+            function changeColorMode(){
+                var div1 = document.getElementById('SliderRGB');
+                var div2 = document.getElementById('SliderCMYK');   
+                if($("#colormode option:selected").text() ==='RGB'){
                   div2.style.display = 'none';
                   div1.style.display = 'block';
                   colormodeSelected = 0;
                 }
-
-                 if($("#colormode option:selected").text() ==='CMYK'){
-          div2.style.display = 'block';
-          div1.style.display = 'none';
-          colormodeSelected = 1;
-
+                if($("#colormode option:selected").text() ==='CMYK'){
+                    div2.style.display = 'block';
+                    div1.style.display = 'none';
+                    colormodeSelected = 1;
                  }
-                  
-                }); 
-
-              function desactForm(formName){
-                    $('#div_msgDemo').show();
-                    $('#specname').prop('disabled',true);
-               } 
-
+            }
 //Script de los sliders RGB para cambiar el dispay de color
 
 var input = document.querySelectorAll("input");
@@ -233,7 +227,7 @@ sliderChange(document.getElementById('black').value, 'sliderStatus7');
 
 
        //Script de los Sliders RGB para mostrar los SPAN
-       function sliderChange(value, element) {
+function sliderChange(value, element) {
     var valHex1;
     var valHex2 = '';
     var valHex3 = '';        
