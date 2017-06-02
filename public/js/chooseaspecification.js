@@ -44,7 +44,7 @@
 
                           //envio de los valores de los Sliders
 
-                          if(colormodeSelected == 0){
+                          if(colormodeSelected === 0){
 
                              localStorage.setItem("RGB",RGB);
                           }else{
@@ -169,7 +169,7 @@ sliderChange(document.getElementById('blue').value, 'sliderStatus3');
 
 
 // Script de los Sliders CMYK para cambiar el display de color
-var input = document.querySelectorAll("input");
+input = document.querySelectorAll("input");
 
 
 var CMYK;
@@ -180,7 +180,7 @@ var Black;
 
 
 
-for(var i = 0; i < input.length; i++) {
+for(i = 0; i < input.length; i++) {
 
     input[i].addEventListener("input", function() {
 
