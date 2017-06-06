@@ -15,8 +15,6 @@
                 <li>Hola <a id="user" class="bold"><%= user.userlongname %></a><a class="bold">!</a></li>
                 <li>Órdenes en Proceso <a id="orders" class="bold"><%= countorders %></a></li>
                <!--  <li>Pedido número:<a id="" class="bold"></a></li> -->
-
-                
                 <li><a id="salir" class="bold" href="/logout">Salir</a></li>
             </ul>
         </header>
@@ -90,7 +88,7 @@
         <br>
         <div style="width: 30px; float: left;">M:</div>
         <input type="range" min="0" max="100" step="1" id="magenta" value="0" onchange="sliderChangeCMYK(this.value, 'sliderStatus5')">
-        Mageta = <span id="sliderStatus5">0</span> <span>%</span>
+        Magenta = <span id="sliderStatus5">0</span> <span>%</span>
         <br>
         <br>
         <div style="width: 30px; float: left;">Y:</div>
@@ -139,7 +137,12 @@
         <div id= "div_msgDemo" style="display:none;" class="picnum2">La versión Demo no puede modificar el nombre de la especificación</div>
         <hr>
         <div class="buttonback">
-            <a href="/chooseanimage">Regresar</a>
+             <% if (specid) { %>
+                <a href="/chooseanimage?specid=<%= specid %>">Regresar</a>
+            <% } else{ %>
+              <a href="/chooseanimage">Regresar</a>
+            <% } %>
+            
         </div>
         <div class="buttoncont">
             <a href="" id="buttonspec">Continuar</a>
