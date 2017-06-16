@@ -1088,14 +1088,14 @@ router.get('/de_designers',
   router.get('/chooseaspecification', 
      require('connect-ensure-login').ensureLoggedIn('/login'),
          function(req, res){
-           if (typeof(req.query['specid']) == 'undefined'){
-                console.log('indefinido');
+          //  if (typeof(req.query['specid']) == 'undefined'){
+          //       console.log('indefinido');
                 // Pedido normal
-                res.render('chooseaspecification', {message: req.flash('message'), user: req.user, countorders:ordersinproc, specid:undefined});
-              }else{
-                console.log(req.query['specid']);
-                res.render('chooseaspecification', {message: req.flash('message'), user: req.user, countorders:ordersinproc, specid: req.query['specid']});
-              }
+                res.render('chooseaspecification', {message: req.flash('message'), user: req.user, countorders:ordersinproc});
+              // }else{
+              //   console.log(req.query['specid']);
+              //   res.render('chooseaspecification', {message: req.flash('message'), user: req.user, countorders:ordersinproc, specid: req.query['specid']});
+              // }
   });
 
 /* Maneja la pagina donde se cierra el pedido o la orden de compra */
