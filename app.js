@@ -15,6 +15,7 @@ var bodyParser = require('body-parser');
 var users = require('./routes/users');
 var routes = require('./routes/index');
 var paypalr = require('./routes/paypal');
+var admin = require('./routes/admin');
 var Spec = require('./models/specification.js');
 //MongoDB 
 var dbConfig = require('./models/db.js');
@@ -84,6 +85,7 @@ if (app.get('env') !== 'development') {
 app.use('/', routes);
 app.use('/users', users);
 app.use('/paypalr', paypalr);
+app.use('/admin', admin);
 // Usar compresión de archivos para mejorar rendimiento
 app.use(compression());
 // PASSPORT.
