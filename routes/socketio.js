@@ -314,7 +314,7 @@ socket.on('get_work_package', function(msg){
 }
 */
 function getTopRankDesigners(cb){
-  OrderPacksCrud.getOrderPacksCashOut('', function(orderpacksdocs){ 
+  OrderPacksCrud.getOrderPacksCashOut(0 , function(orderpacksdocs){ 
     cb(orderpacksdocs);
   });  
 }

@@ -19,29 +19,47 @@
                 <p class="texto_plano">Ingresa el valor del dolar en pesos</p>
             </div>
         </section>
+        <span id= "fechaactual"> </span>
+        <br>
         <section id="cashoutForm1">
-            <form class="login" id = "cashoutForm"  action='/admin/adm_do_cashout' method='POST'>
+            <form class="login" id = "cashoutForm"  action='/admin/adm_review_cashout' method='POST'>
                 <ul>
                     <li>
                         <label class="texto_plano">Dólar</label>
-                        <input type="number"step="0.01" name="dolar" placeholder="0.00" required>
+                        <input type="number"step="0.01" name="dollarValue" placeholder="0.00" required>
                     </li>
                 </ul>
                 <div class="button2">
-                    <input type="submit" value="Hacer el corte">
+                    <input type="submit" value="Revisar el corte">
                 </div>
             </form>
         </section>
-
-        <div id= "orderspacktable" class="tabla">
-            <p class="encabezado">Paquetes trabajados</p>
+        <div id= "orderspacktablecashout" class="tabla">
+            <p class="encabezado">Resumen del corte</p>
             <table>
                 <tr>
                     <th>Diseñador</th>
                     <th>Imágenes</th>
-                    <th>Monto</th>
+                    <th>Monto USD</th>
+                    <th>Monto Pesos</th>
                 </tr>
             </table>
         </div>
+        <div id= "orderspacktablecashoutdetail" class="tabla">
+            <p class="encabezado">Detalle del corte</p>
+            <table>
+                <tr>
+                    <th>Pedido</th>
+                    <th>Paquete</th>
+                    <th>Diseñador</th>
+                    <th>Imágenes</th>
+                </tr>
+            </table>
+        </div>
+        <form class="login" id = "cashoutForm2"  action='/admin/adm_do_cashout' method='POST'>
+                <div class="button2">
+                    <input type="submit" value="Confirmar el corte">
+                </div>
+        </form>
     </body>
 </html>
