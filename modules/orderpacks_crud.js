@@ -35,8 +35,14 @@ module.exports.getOrderPacksCashOut = function (dollarValue, cb) {
                     listOrderPacks.push({name:orderpacksdocs[i - 1].designerid.userlongname, imagecount: sumimages, specPrice:specPrice, totalUSD:sumDollars, totalPesos:(totalPesos/10000)});
                     id_designer = orderpacksdocs[i].designerid._id;
                     sumimages = orderpacksdocs[i].imagecount;
+
+                    specPrice = parseFloat(orderpacksdocs[i].specid.totalprice);
+                    if ((orderpacksdocs[i].specid.totalprice == 0) && (orderpacksdocs[i].specid.name =='GRATIS')){
+                        specPrice = parseFloat(config.prices.cutandremove);
+                        orderpacksdocs[i].specid.totalprice = specPrice;
+                    }
                     totalUSD = specPrice * orderpacksdocs[i].imagecount;
-                    sumDollars = sumDollars + totalUSD;
+                    sumDollars = totalUSD;
                 }
                 if (orderpacksdocs.length === (i + 1)){
                     //totalUSD = specPrice * sumimages; 
