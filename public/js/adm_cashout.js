@@ -23,7 +23,7 @@ $(document).ready(function(){
                     var orderpacksdocs = data.orderpacksdocs;
                     console.log("corte", listOrderPacks);
                     if (listOrderPacks.length > 0){
-                        $("#orderspacktablecashout tbody > tr:first-child + tr").remove();
+                        $("#orderspacktablecashout").find("tr:gt(0)").remove();
                         for (var i = 0; i < listOrderPacks.length; i++){
                             var row = $("<tr>");
                             row.append($("<td>" + listOrderPacks[i].name + "</td>"))
@@ -32,7 +32,8 @@ $(document).ready(function(){
                                     .append($("<td>" + listOrderPacks[i].totalPesos + "</td>"));
                             $("#orderspacktablecashout tbody").append(row);
                         }
-                        $("#orderspacktablecashoutdetail tbody > tr:first-child + tr").remove();
+                        //$("#orderspacktablecashoutdetail tbody > tr:first-child + tr").empty();
+                        $("#orderspacktablecashoutdetail").find("tr:gt(0)").remove();
                         for (var i = 0; i < orderpacksdocs.length; i++){
                             var row = $("<tr>");
                             row.append($("<td>" + orderpacksdocs[i].numorder + "</td>"))

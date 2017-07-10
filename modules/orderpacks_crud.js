@@ -13,6 +13,7 @@ module.exports.getOrderPacksCashOut = function (dollarValue, cb) {
         if (orderpacksdocs.length > 0){
             var id_designer = orderpacksdocs[0].designerid._id;
             var sumimages = 0;
+            var sumDollars = 0;
             var specPrice = 0;
             var totalUSD = 0;
             var totalPesos = 0;
@@ -20,27 +21,27 @@ module.exports.getOrderPacksCashOut = function (dollarValue, cb) {
             for ( var i = 0; i < orderpacksdocs.length ; i++){
                 if (id_designer === orderpacksdocs[i].designerid._id ){
                     sumimages = sumimages + orderpacksdocs[i].imagecount;
+                    specPrice = parseFloat(orderpacksdocs[i].specid.totalprice);
+                    if ((orderpacksdocs[i].specid.totalprice == 0) && (orderpacksdocs[i].specid.name =='GRATIS')){
+                        specPrice = parseFloat(config.prices.cutandremove);
+                        orderpacksdocs[i].specid.totalprice = specPrice;
+                    }
+                    totalUSD = specPrice * orderpacksdocs[i].imagecount;
+                    sumDollars = sumDollars + totalUSD;
                 }
                 else{
-                    specPrice = parseFloat(orderpacksdocs[i - 1].specid.totalprice);
-                    if ((orderpacksdocs[i - 1].specid.totalprice === 0) && (orderpacksdocs[i - 1].specid.name =='GRATIS')){
-                        specPrice = parseFloat(config.prices.cutandremove);
-                    }
-                    totalUSD = specPrice * sumimages;
-                    totalPesos = totalUSD  * (dollarValue * 100);
-                    listOrderPacks.push({name:orderpacksdocs[i - 1].designerid.userlongname, imagecount: sumimages, specPrice:specPrice, totalUSD:totalUSD, totalPesos:(totalPesos/100)});
+                    //totalUSD = specPrice * sumimages;
+                    totalPesos = (sumDollars * 100)  * (dollarValue * 100);
+                    listOrderPacks.push({name:orderpacksdocs[i - 1].designerid.userlongname, imagecount: sumimages, specPrice:specPrice, totalUSD:sumDollars, totalPesos:(totalPesos/10000)});
                     id_designer = orderpacksdocs[i].designerid._id;
                     sumimages = orderpacksdocs[i].imagecount;
-
+                    totalUSD = specPrice * orderpacksdocs[i].imagecount;
+                    sumDollars = sumDollars + totalUSD;
                 }
                 if (orderpacksdocs.length === (i + 1)){
-                    specPrice = parseFloat(orderpacksdocs[i].specid.totalprice);
-                    if ((orderpacksdocs[i].specid.totalprice === 0) && (orderpacksdocs[i].specid.name =='GRATIS')){
-                        specPrice = parseFloat(config.prices.cutandremove);
-                    }
-                    totalUSD = specPrice * sumimages; 
-                    totalPesos = totalUSD  * (dollarValue * 100);
-                    listOrderPacks.push({name:orderpacksdocs[i].designerid.userlongname, imagecount: sumimages, specPrice:specPrice, totalUSD:totalUSD, totalPesos:(totalPesos/100)});
+                    //totalUSD = specPrice * sumimages; 
+                    totalPesos = (sumDollars * 100)   * (dollarValue * 100);
+                    listOrderPacks.push({name:orderpacksdocs[i].designerid.userlongname, imagecount: sumimages, specPrice:specPrice, totalUSD:sumDollars, totalPesos:(totalPesos/10000)});
                 }
             }  
             listOrderPacks.sort(function(a,b) {
