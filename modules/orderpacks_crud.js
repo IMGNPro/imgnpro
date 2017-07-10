@@ -1,4 +1,5 @@
 var OrderPacks = require('../models/orderpacks.js');
+var config = require('../config');
 
 module.exports.getOrderPacksCashOut = function (dollarValue, cb) {
     OrderPacks
@@ -22,6 +23,9 @@ module.exports.getOrderPacksCashOut = function (dollarValue, cb) {
                 }
                 else{
                     specPrice = parseFloat(orderpacksdocs[i - 1].specid.totalprice);
+                    if ((orderpacksdocs[i - 1].specid.totalprice === 0) && (orderpacksdocs[i - 1].specid.name =='GRATIS')){
+                        specPrice = parseFloat(config.prices.cutandremove);
+                    }
                     totalUSD = specPrice * sumimages;
                     totalPesos = totalUSD  * (dollarValue * 100);
                     listOrderPacks.push({name:orderpacksdocs[i - 1].designerid.userlongname, imagecount: sumimages, specPrice:specPrice, totalUSD:totalUSD, totalPesos:(totalPesos/100)});
@@ -31,6 +35,9 @@ module.exports.getOrderPacksCashOut = function (dollarValue, cb) {
                 }
                 if (orderpacksdocs.length === (i + 1)){
                     specPrice = parseFloat(orderpacksdocs[i].specid.totalprice);
+                    if ((orderpacksdocs[i].specid.totalprice === 0) && (orderpacksdocs[i].specid.name =='GRATIS')){
+                        specPrice = parseFloat(config.prices.cutandremove);
+                    }
                     totalUSD = specPrice * sumimages; 
                     totalPesos = totalUSD  * (dollarValue * 100);
                     listOrderPacks.push({name:orderpacksdocs[i].designerid.userlongname, imagecount: sumimages, specPrice:specPrice, totalUSD:totalUSD, totalPesos:(totalPesos/100)});
