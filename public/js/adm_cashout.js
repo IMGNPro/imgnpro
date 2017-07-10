@@ -23,18 +23,18 @@ $(document).ready(function(){
                     var orderpacksdocs = data.orderpacksdocs;
                     console.log("corte", listOrderPacks);
                     if (listOrderPacks.length > 0){
+                        $("#orderspacktablecashout tbody > tr:first-child + tr").remove();
                         for (var i = 0; i < listOrderPacks.length; i++){
                             var row = $("<tr>");
-                             $("#orderspacktablecashout tbody > tr:first-child + tr").remove();
                             row.append($("<td>" + listOrderPacks[i].name + "</td>"))
                                     .append($("<td>" + listOrderPacks[i].imagecount + "</td>"))
                                     .append($("<td>" + listOrderPacks[i].totalUSD + "</td>"))
                                     .append($("<td>" + listOrderPacks[i].totalPesos + "</td>"));
                             $("#orderspacktablecashout tbody").append(row);
                         }
+                        $("#orderspacktablecashoutdetail tbody > tr:first-child + tr").remove();
                         for (var i = 0; i < orderpacksdocs.length; i++){
                             var row = $("<tr>");
-                             $("#orderspacktablecashoutdetail tbody > tr:first-child + tr").remove();
                             row.append($("<td>" + orderpacksdocs[i].numorder + "</td>"))
                                     .append($("<td>" + orderpacksdocs[i].name + "</td>"))
                                     .append($("<td>" + orderpacksdocs[i].designerid.userlongname + "</td>"))
