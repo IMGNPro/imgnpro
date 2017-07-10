@@ -37,6 +37,8 @@ $(document).ready(function(){
                             var row = $("<tr>");
                             row.append($("<td>" + orderpacksdocs[i].numorder + "</td>"))
                                     .append($("<td>" + orderpacksdocs[i].name + "</td>"))
+                                    .append($("<td>" + orderpacksdocs[i].specid.name + "</td>"))
+                                    .append($("<td>" + orderpacksdocs[i].specid.totalprice + "</td>"))
                                     .append($("<td>" + orderpacksdocs[i].designerid.userlongname + "</td>"))
                                     .append($("<td>" + orderpacksdocs[i].imagecount + "</td>"));
                             $("#orderspacktablecashoutdetail tbody").append(row);
