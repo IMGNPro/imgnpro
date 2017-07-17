@@ -63,21 +63,51 @@ $(document).ready(function(){
         var zip = new JSZip();
         var count = 0;
         var name = nombre+".zip";
+
+
+
         urls.forEach(function(url){
-            JSZipUtils.getBinaryContent(url, function (err, data) {
-            if(err) {
-                throw err; 
-            }
-            console.log(url,urls, urlsOriginal);
-            zip.file(urlsOriginal[count], data,  {binary:true});
-            count++;
-            if (count == urls.length) {
-                zip.generateAsync({type:'blob'}).then(function(content) {
-                    console.log(content, name);
-                    saveAs(content, name);
-                });
-            }
+            // JSZipUtils.getBinaryContent(url, function (err, data) {
+            //     if(err) {
+            //         throw err; 
+            //     }
+            //     console.log(url,urls, urlsOriginal);
+            //     zip.file(urlsOriginal[count], data,  {binary:true});
+            //     count++;
+            //     if (count == urls.length) {
+            //         zip.generateAsync({type:'blob'},function updateCallback(metadata) {
+            //             console.log(metadata.percent + '%');
+            //         }).then(function(content) {
+            //             console.log(content, name);
+            //             saveAs(content, name);
+            //         });
+            //     }
+            // });
+
+            JSZipUtils.getBinaryContent(url, {
+                done: function(data) {
+                    console.debug(data);
+                    console.log(url,urls, urlsOriginal);
+                    zip.file(urlsOriginal[count], data,  {binary:true});
+                    count++;
+                    if (count == urls.length) {
+                        zip.generateAsync({type:'blob'},function updateCallback(metadata) {
+                            $("#spZipPercent").html('<h1>Comprimiendo:' + metadata.percent + '%</h1>');
+                        }).then(function(content) {
+                            console.log(content, name);
+                            saveAs(content, name);
+                        });
+                    }
+                },
+                fail: function(err) {
+                    console.error(err);
+                    throw err;
+                },
+                progress: function(p) {
+                    $("#spDownloadPercent").html('<h1>Descarga:' + p.percent + '%</h1>');
+                }
             });
+
         });
         }
     });

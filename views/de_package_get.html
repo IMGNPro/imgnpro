@@ -8,7 +8,7 @@
         <link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico"/>
         <script src="../js/FileSaver.min.js"></script>
         <script src="../js/jszip.min.js"></script>
-        <script src="../js/jszip-utils.min.js"></script>
+        <script src="../js/jszip-utils.js"></script>
         <script src="../js/de_package_get.js"></script>
     </head>
     <body>
@@ -21,7 +21,10 @@
 
             
    
-            <p class="encabezado">Paquete de Pedido </p>(<span><a id="specLink" href>Especificación </a></span><span><a href="#" id ="link1"> Descargar todo</a></span>)
+            <p class="encabezado">Paquete de Pedido </p>(<span><a id="specLink" href>Especificación</a></span>) (<span><a href="#" id ="link1">Descargar todo</a></span>)
+            <br>
+            <span id="spDownloadPercent"></span>
+            <span id="spZipPercent"></span>
             <table>
                 <tr>
                     <th>Orden</th>
