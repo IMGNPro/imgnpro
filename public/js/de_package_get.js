@@ -1,5 +1,7 @@
 $(document).ready(function(){
     var ajaxUrl = '/listorderpack/' + $('#packageid').val();
+    var urls = [];
+    var urlsOriginal = [];
     console.log(ajaxUrl);
     $.ajax({
         type: 'get',
@@ -29,6 +31,9 @@ $(document).ready(function(){
                         if (data.signedRequest) {
                             url = data.signedRequest;
                             urlthumb = data.signedthumbRequest;
+                            urls.push(data.signedRequest);
+                            urlsOriginal.push(params.filename);
+                            console.log(urls, urlsOriginal);
                         }
                         var row = $("<tr>");
                         row.append($("<td>" + value.numorder + "</td>"))
@@ -44,6 +49,66 @@ $(document).ready(function(){
 
                 });
             }); 
+        }
+    });
+
+
+    $("#link1").click(function() {
+ 
+        var nombre = "Zip_imgpro";
+        //The function is called
+        compressed_img(urls,nombre);
+
+        function compressed_img(urls,nombre) {
+        var zip = new JSZip();
+        var count = 0;
+        var name = nombre+".zip";
+
+
+
+        urls.forEach(function(url){
+            // JSZipUtils.getBinaryContent(url, function (err, data) {
+            //     if(err) {
+            //         throw err; 
+            //     }
+            //     console.log(url,urls, urlsOriginal);
+            //     zip.file(urlsOriginal[count], data,  {binary:true});
+            //     count++;
+            //     if (count == urls.length) {
+            //         zip.generateAsync({type:'blob'},function updateCallback(metadata) {
+            //             console.log(metadata.percent + '%');
+            //         }).then(function(content) {
+            //             console.log(content, name);
+            //             saveAs(content, name);
+            //         });
+            //     }
+            // });
+
+            JSZipUtils.getBinaryContent(url, {
+                done: function(data) {
+                    console.debug(data);
+                    console.log(url,urls, urlsOriginal);
+                    zip.file(urlsOriginal[count], data,  {binary:true});
+                    count++;
+                    if (count == urls.length) {
+                        zip.generateAsync({type:'blob'},function updateCallback(metadata) {
+                            $("#spZipPercent").html('<h1>Comprimiendo:' + metadata.percent + '%</h1>');
+                        }).then(function(content) {
+                            console.log(content, name);
+                            saveAs(content, name);
+                        });
+                    }
+                },
+                fail: function(err) {
+                    console.error(err);
+                    throw err;
+                },
+                progress: function(p) {
+                    $("#spDownloadPercent").html('<h1>Descarga:' + p.percent + '%</h1>');
+                }
+            });
+
+        });
         }
     });
 });

@@ -6,6 +6,9 @@
         <link rel="stylesheet" href="../stylesheets/imgncss_session.css">
         <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
         <link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico"/>
+        <script src="../js/FileSaver.min.js"></script>
+        <script src="../js/jszip.min.js"></script>
+        <script src="../js/jszip-utils.js"></script>
         <script src="../js/de_package_get.js"></script>
     </head>
     <body>
@@ -15,7 +18,13 @@
         </header>
     <section id="contenedor">
         <div id= "orderstable" class="tabla">
-            <p class="encabezado">Paquete de Pedido </p>(<span><a id="specLink" href>Especificación</a></span>)
+
+            
+   
+            <p class="encabezado">Paquete de Pedido </p>(<span><a id="specLink" href>Especificación</a></span>) (<span><a href="#" id ="link1">Descargar todo</a></span>)
+            <br>
+            <span id="spDownloadPercent"></span>
+            <span id="spZipPercent"></span>
             <table>
                 <tr>
                     <th>Orden</th>

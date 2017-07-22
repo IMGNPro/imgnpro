@@ -2,10 +2,10 @@
 module.exports = function(io){
   var User = require('../models/user.js');
   var OrderPacks = require('../models/orderpacks.js');
+  var OrderPacksCrud = require('../modules/orderpacks_crud.js');
   var app = require('express');
   var config = require('../config');
   var sortJsonArray = require('sort-json-array');
-  
   var router = app.Router();
 
 io.on('connection', function(socket){
@@ -259,35 +259,45 @@ socket.on('get_work_package', function(msg){
 
   socket.on('get_toprankdesigner', function(msg){
          getTopRankDesigners(function(toprankdocs){
+           console.log(toprankdocs);
             socket.emit('toprankdesigner', JSON.stringify(toprankdocs));
          });
   });       
 });
-function getTopRankDesigners(cb){
+
+/*function getTopRankDesigners(cb){
   OrderPacks
   .find({status:'Terminado', designerid:{$exists:true}, date_finish_work:{$exists:true}, weekly_cash_out:{$exists:true}, weekly_cash_out: false})
   //.select('imagecount userlongname')
-  .populate('designerid', 'userlongname')
+  .populate({path:'designerid', select: 'userlongname'})
+  .populate({path:'specid', select:'totalprice name'})
   .sort('designerid')
   .exec(function(err,orderpacksdocs){
     console.log(orderpacksdocs, orderpacksdocs.length);
+    console.log("totalPrice", parseFloat(orderpacksdocs[0].specid.totalprice));
     
     if (orderpacksdocs.length > 0){
       var id_designer = orderpacksdocs[0].designerid._id;
       var sumimages = 0;
       var topRankDesigner = [];
+      var specPrice = 0;
+      var totalPrice = 0;
       for ( var i = 0; i < orderpacksdocs.length ; i++){
         if (id_designer === orderpacksdocs[i].designerid._id ){
           sumimages = sumimages + orderpacksdocs[i].imagecount;
         }
         else{
-          topRankDesigner.push({name:orderpacksdocs[i-1].designerid.userlongname, imagecount: sumimages});
+          specPrice = parseFloat(orderpacksdocs[i - 1].specid.totalprice);
+          totalPrice = specPrice * sumimages;
+          topRankDesigner.push({name:orderpacksdocs[i - 1].designerid.userlongname, imagecount: sumimages, specPrice:specPrice, totalPrice:totalPrice});
           id_designer = orderpacksdocs[i].designerid._id;
           sumimages = orderpacksdocs[i].imagecount;
 
         }
-        if (orderpacksdocs.length === (i+1)){
-          topRankDesigner.push({name:orderpacksdocs[i].designerid.userlongname, imagecount: sumimages});
+        if (orderpacksdocs.length === (i + 1)){
+          specPrice = parseFloat(orderpacksdocs[i].specid.totalprice);
+          totalPrice = specPrice * sumimages; 
+          topRankDesigner.push({name:orderpacksdocs[i].designerid.userlongname, imagecount: sumimages, specPrice:specPrice, totalPrice:totalPrice});
         }
 
       }
@@ -300,6 +310,12 @@ function getTopRankDesigners(cb){
       cb('[]');
     }
 
+  });  
+}
+*/
+function getTopRankDesigners(cb){
+  OrderPacksCrud.getOrderPacksCashOut(0 , function(orderpacksdocs){ 
+    cb(orderpacksdocs);
   });  
 }
 
