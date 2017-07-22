@@ -64,19 +64,21 @@ $(document).ready(function(){
                     document.getElementById('res_message').innerHTML= data.message;    
                 }
                 else{
-                    alert(data.message);
-                    $("#orderspacktablecashoutdetail tbody > tr:first-child + tr").remove();
-                    $("#orderspacktablecashout tbody > tr:first-child + tr").remove();
-                    //setTimeout(window.location='/de_login',500);  
-                    console.log("corte", data);  
-
-                    /*for (var i = 0; i < data.length; i++){
-                                var row = $("<tr>");
-                                row.append($("<td>" + data[i].name + "</td>"))
-                                     .append($("<td>" + data[i].imagecount + "</td>"))
-                                     .append($("<td>" + data[i].totalPrice + "</td>"));
-                                $("#orderspacktablecashout tbody").append(row);
-                            }*/
+                    if(confirm("¿Quieres realizar el corte?")){         
+                        alert(data.message);
+                        $("#orderspacktablecashoutdetail tbody > tr:first-child + tr").remove();
+                        $("#orderspacktablecashout tbody > tr:first-child + tr").remove();
+                        //setTimeout(window.location='/de_login',500);  
+                        console.log("corte", data);  
+                        /*for (var i = 0; i < data.length; i++){
+                                    var row = $("<tr>");
+                                    row.append($("<td>" + data[i].name + "</td>"))
+                                        .append($("<td>" + data[i].imagecount + "</td>"))
+                                        .append($("<td>" + data[i].totalPrice + "</td>"));
+                                    $("#orderspacktablecashout tbody").append(row);
+                                }*/
+                    
+                    }
                 }
             }
         });
