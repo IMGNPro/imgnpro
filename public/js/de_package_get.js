@@ -55,7 +55,7 @@ $(document).ready(function(){
 
     $("#link1").click(function() {
  
-        var nombre = "Zip_imgpro";
+        var nombre = "zip_" + $('#packageid').val();
         //The function is called
         compressed_img(urls,nombre);
 
