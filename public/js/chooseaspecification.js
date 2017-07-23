@@ -1,5 +1,5 @@
  
-var RGB = '{"r":0,"g":0,"b":0}';
+var RGB = '{"r":255,"g":255,"b":255}';
 var CMYK = '{"c":0,"m":0,"y":0,"k":0}';
 var colormodeSelected = 0;
 $(document).ready(function(){
@@ -10,8 +10,7 @@ $(document).ready(function(){
                 var currentColorMode = localStorage.getItem("colormode");
                 var currentRGB = localStorage.getItem("RGB");
                 var currentCMYK = localStorage.getItem("CMYK");
-                
-
+                var currentBackground = localStorage.getItem("background");
                 $('#specname').focus();
                 if(strspecname !== null){
                     $("#specname").attr("value",strspecname);
@@ -29,9 +28,7 @@ $(document).ready(function(){
                     desactAllNext();
                 }
                 if (v_typespec == 'free'){
-
                     desactForm('specForm');       
-
                 }
                 if(currentColorMode !== null){
                     $('#colormode').prop("value", currentColorMode);
@@ -63,6 +60,14 @@ $(document).ready(function(){
                     sliderChangeCMYK(document.getElementById('black').value, 'sliderStatus7');
                     colormodeSelected = 1;
                 }
+                if (currentBackground !== null){
+                    $('#background').prop('value', currentBackground);
+                    if (currentBackground === 'sin_fondo'){
+                        displayRGB.style.background = "#E5E5E5";
+                        displayCMYK.style.background = "#E5E5E5";
+                        $('#colormode').prop("disabled", true);
+                    }
+                }
 
                // if(currentCMYK === null && currentRGB === null){
                     slidersDisplay();
@@ -79,8 +84,13 @@ $(document).ready(function(){
                           localStorage.setItem("specname", $('input:text[name=name]').val());
                           localStorage.setItem("format", $('select[name="format"]').val());
                           localStorage.setItem("colormode", $('select[name="colormode"]').val());
-                          //localStorage.setItem("background", $('select[name="background"]').val());
-                          localStorage.setItem("backgrndcolor", $('#valHex').text());
+                          localStorage.setItem("background", $('select[name="background"]').val());
+                          if($("#background option:selected").text() ==='SIN FONDO' ){
+                            localStorage.setItem("backgrndcolor", '#000000');
+                          }
+                          else{
+                            localStorage.setItem("backgrndcolor", $('#valHex').text());
+                          }    
                           localStorage.setItem("dpinone","");
                           localStorage.removeItem("DPI");
 
@@ -106,24 +116,19 @@ $(document).ready(function(){
                     ev.preventDefault();
                 });
                
-                // $("#background").change(function() {
-                //     if($("#background option:selected").text() ==='COLOR' ){
-                //         $('#colorselect').prop("disabled", false);
-                //       }
-                //     if($("#background option:selected").text() ==='BLANCO' ){
-                //         $('#colorselect').prop("value", '#FFFFFF');
-                //         $('#colorselect').prop("disabled", true);
-                //       }
-                //     if($("#background option:selected").text() ==='NEGRO' ){
-                //         $('#colorselect').prop("value", '#000000');
-                //         $('#colorselect').prop("disabled", true);
-                //       }
-                //     if($("#background option:selected").text() ==='SIN FONDO' ){
-                //         $('#colorselect').prop("value", '#E5E5E5');
-                //         $('#colorselect').prop("disabled", true);
-                //       }
-                
-                // });
+                $("#background").change(function() {
+                    if($("#background option:selected").text() ==='COLOR' ){
+                        //$('#colorselect').prop("disabled", false);
+                        displayRGB.style.background = $('#valHex').text();
+                        displayCMYK.style.background = $('#valHex').text();
+                        $('#colormode').prop("disabled", false);
+                    }
+                    if($("#background option:selected").text() ==='SIN FONDO' ){
+                        displayRGB.style.background = "#E5E5E5";
+                        displayCMYK.style.background = "#E5E5E5";
+                        $('#colormode').prop("disabled", true);
+                    }
+                });
                 $("#format").change(function() {
                       $('#sin_fondo').prop("disabled", false);
                       $('#mode_cmyk').prop("disabled", false);
@@ -144,7 +149,15 @@ $(document).ready(function(){
                 });
              //mostrar el div donde esta los sliders 
             $("#colormode").change(function() {
-                 changeColorMode();
+                changeColorMode();
+                if($("#colormode option:selected").text() ==='RGB' ){
+                    //sliderChange(document.getElementById('red').value, 'sliderStatus');
+                    refreshRGBColor();
+                }
+                if($("#colormode option:selected").text() ==='CMYK' ){
+                    //sliderChangeCMYK(document.getElementById('cyan').value, 'sliderStatus4');
+                    refreshCMYKColor();
+                }
             }); 
 
             function desactForm(formName){
@@ -170,11 +183,9 @@ $(document).ready(function(){
 
  });
 
-
-
        //Script de los Sliders RGB para mostrar los SPAN
 function sliderChange(value, element) {
-    var valHex1;
+    var valHex1 = '';
     var valHex2 = '';
     var valHex3 = '';        
     document.getElementById(element).innerHTML = value;
@@ -212,15 +223,12 @@ function CMYKtoRGB(cyan,magenta,yellow,black){
 		m = magenta / 100;
 		y = yellow / 100;
 		k = black / 100;
- 
 		var r = 1 - Math.min( 1, c * ( 1 - k ) + k );
 		var g = 1 - Math.min( 1, m * ( 1 - k ) + k );
 		var b = 1 - Math.min( 1, y * ( 1 - k ) + k );
- 
 		r = Math.round( r * 255 );
 		g = Math.round( g * 255 );
 		b = Math.round( b * 255 );
-
        //displayCMYK.style.background = "rgb(" + r + ", " + g + ", " + b + ")";
        return '{ "r":'+ r + ',"g": '+ g + ',"b":'+ b + '}';
 }
@@ -228,7 +236,6 @@ function CMYKtoRGB(cyan,magenta,yellow,black){
 function slidersDisplay(){
     //Script de los sliders RGB para cambiar el dispay de color
     var input = document.querySelectorAll("input");
-
     var Red;
     var Green;
     var Blue;
@@ -296,4 +303,40 @@ function slidersDisplay(){
     sliderChange(document.getElementById('magenta').value, 'sliderStatus5');
     sliderChange(document.getElementById('yellow').value, 'sliderStatus6');
     sliderChange(document.getElementById('black').value, 'sliderStatus7');        
+}
+
+function refreshRGBColor(){
+    var red = document.getElementById("red").value,
+    green = document.getElementById("green").value,
+    blue = document.getElementById("blue").value;
+    //var display = document.getElementById("display");
+    displayRGB.style.background = "rgb(" + red + ", " + green + ", " + blue + ")"; 
+    document.getElementById('valHex').innerHTML = '#' + dec2hex(red) + dec2hex(green) + dec2hex(blue);
+    console.log($('#valHex').text());
+}
+
+function refreshCMYKColor(){
+    var cyan = document.getElementById("cyan").value,
+        magenta = document.getElementById("magenta").value,
+        yellow = document.getElementById("yellow").value;
+        black = document.getElementById("black").value;
+    //var display = document.getElementById("display");
+    c = cyan / 100;
+    m = magenta / 100;
+    y = yellow / 100;
+    k = black / 100;
+    var r = 1 - Math.min( 1, c * ( 1 - k ) + k );
+    var g = 1 - Math.min( 1, m * ( 1 - k ) + k );
+    var b = 1 - Math.min( 1, y * ( 1 - k ) + k );
+    r = Math.round( r * 255 );
+    g = Math.round( g * 255 );
+    b = Math.round( b * 255 );
+    Cyan = cyan;
+    Magenta = magenta;
+    Yellow = yellow;
+    Black = black;
+    CMYK = '{"c":'+Cyan+',"m":'+Magenta+',"y":'+Yellow+',"k":'+Black+'}';
+    displayCMYK.style.background = "rgb(" + r + ", " + g + ", " + b + ")";
+    document.getElementById('valHex').innerHTML = '#' + dec2hex(r) + dec2hex(g) + dec2hex(b);
+    console.log($('#valHex').text());
 }

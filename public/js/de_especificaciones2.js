@@ -33,9 +33,23 @@ $(document).ready(function(){
                         if (data.spec.background === 'negro' ){
                             $('#colorselect').prop("value", '#000');
                         }
+                        if (data.spec.backgrndcolor){
+                            $('#colorselect').prop("value", data.spec.backgrndcolor);
+                        }
                         
                         if (data.spec.background === 'sin_fondo' ){
                             $('#colorselect').hide();
+                        }
+
+                        if (data.spec.background === 'color' ){
+                            if (data.spec.colormode === 'rgb'){
+                                var strColorValues = JSON.parse(data.spec.RGB);
+                                $('#colormodevalues').text("R:" + strColorValues.r + " G:" +  strColorValues.g + " B:" + strColorValues.b);
+                            }
+                            else if(data.spec.colormode === 'cmyk'){
+                                var strColorValues = JSON.parse(data.spec.CMYK);
+                                $('#colormodevalues').text("C:" + strColorValues.c + " M:" +  strColorValues.m + " Y:" + strColorValues.y + " K:" + strColorValues.k);
+                            }
                         }
                         // if (data.spec.sizenone==null){
                         //     $('#chksizenone').prop('checked', false);
