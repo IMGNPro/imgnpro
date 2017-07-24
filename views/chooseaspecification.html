@@ -15,8 +15,6 @@
                 <li>Hola <a id="user" class="bold"><%= user.userlongname %></a><a class="bold">!</a></li>
                 <li>Órdenes en Proceso <a id="orders" class="bold"><%= countorders %></a></li>
                <!--  <li>Pedido número:<a id="" class="bold"></a></li> -->
-
-                
                 <li><a id="salir" class="bold" href="/logout">Salir</a></li>
             </ul>
         </header>
@@ -60,20 +58,64 @@
                     <option value="psd">PSD</option>
                     <option value="tiff">TIFF</option>
                 </select><br>
+                <!-- div con los sliders RGB-->
+                       <div class="SliderRGB" id="SliderRGB">
+                            <div style="width: 30px; float: left;">R:</div>
+                                <input type="range" min="0" max="255" step="1" id="red" value="255" onchange="sliderChange(this.value, 'sliderStatus')">
+                                  Red = <span id="sliderStatus">255</span>
+                                    <br>
+                                    <div style="width: 30px; float: left;">G:</div>
+                                    <input type="range" min="0" max="255" step="1" id="green" value="255" onchange="sliderChange(this.value, 'sliderStatus2')">
+                                    Green = <span id="sliderStatus2">255</span>
+                                    <br>
+                                    <div style="width: 30px; float: left;">B:</div>
+                                    <input type="range" min="0" max="255" step="1" id="blue" value="255" onchange="sliderChange(this.value, 'sliderStatus3')">
+                                    Blue = <span id="sliderStatus3">255</span>
+
+                        <div id="displayRGB"></div>
+
+                         Codigo Hex = <span id=valHex>#FFFFFF</span> 
+                    </div>
+
+
+        <!-- div con los Silders CMYK-->
+
+                <div class="SliderCMYK" id="SliderCMYK">
+                    <div style="width: 30px; float: left;">C:</div>
+                    <input type="range" min="0" max="100" step="1" id="cyan" value="0" onchange="sliderChangeCMYK(this.value, 'sliderStatus4')">
+                    Cyan = <span id="sliderStatus4">0</span><span>%</span>
+                    <br>
+                    <br>
+                    <div style="width: 30px; float: left;">M:</div>
+                    <input type="range" min="0" max="100" step="1" id="magenta" value="0" onchange="sliderChangeCMYK(this.value, 'sliderStatus5')">
+                    Magenta = <span id="sliderStatus5">0</span> <span>%</span>
+                    <br>
+                    <br>
+                    <div style="width: 30px; float: left;">Y:</div>
+                    <input type="range" min="0" max="100" step="1" id="yellow" value="0" onchange="sliderChangeCMYK(this.value, 'sliderStatus6')">
+                    Yellow = <span id="sliderStatus6">0</span><span>%</span>
+                    <br>
+                    <br>
+                    <div style="width: 30px; float: left;">K:</div>
+                    <input type="range" min="0" max="100" step="1" id="black" value="0" onchange="sliderChangeCMYK(this.value, 'sliderStatus7')">
+                    Black = <span id="sliderStatus7">0</span><span>%</span>
+                    <br>
+                    <br>
+                    <div id="displayCMYK"></div>
+
+                    Porcentaje de colores  = <span id="valCMYK">CMYK (0%,0%,0%,0%)</span>
+
+                </div>
+                <label for="fondo">Fondo</label><br>
+                <select id="background" name="background">
+                    <option value="color">COLOR</option>
+                    <option value="sin_fondo">SIN FONDO</option>
+                </select><br>
                 <label for="modo">Modo Color</label><br>
                 <select id="colormode" name="colormode">
                     <option value="rgb">RGB</option>
                     <option id="mode_cmyk" value="cmyk">CMYK</option>
                 </select><br>
-                <label for="fondo">Fondo</label><br>
-                <select id="background" name="background">
-                    <option value="blanco">BLANCO</option>
-                    <option value="negro">NEGRO</option>
-                    <option value="color">COLOR</option>
-                    <option id="sin_fondo" value="sin_fondo" disabled>SIN FONDO</option>
-                </select>
-                <input id="colorselect" type="color" name="backgrndcolor" value="#FFFFFF" disabled>
-                <br>
                 <label for="dpi">DPI</label><br>
                 <input id="depeis" type="text" name="DPI" value="0" maxlength="5" disabled><label for="dpi">dpi</label>
                 <input id="chkalgnnone" class="checkcheck" type="checkbox" name="dpinone" value="none"  checked onclick="javascript:desactAllNext();"><span class="postcheck">Sin Cambios</span>
@@ -87,7 +129,7 @@
         <div id= "div_msgDemo" style="display:none;" class="picnum2">La versión Demo no puede modificar el nombre de la especificación</div>
         <hr>
         <div class="buttonback">
-            <a href="/chooseanimage">Regresar</a>
+              <a href="/chooseanimage">Regresar</a>
         </div>
         <div class="buttoncont">
             <a href="" id="buttonspec">Continuar</a>

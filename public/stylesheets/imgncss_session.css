@@ -513,6 +513,7 @@ hr {
 }
 
 .recontenedor {
+    position:relative;
     min-height: 150px;
     border: 3px solid #000;
     padding: 20px 20px;
@@ -524,6 +525,7 @@ hr {
 .recontenedor form{
     display: block;
     text-decoration: none;
+    /*height: 240px;*/
 }
 
 .recontenedor label {
@@ -1344,3 +1346,42 @@ textarea{
     font-weight: 600;
     margin-left:10%; 
     }
+
+
+
+.SliderRGB {
+     position:absolute;    
+     left:40%;
+     top:10%;
+     width: 80%;
+     height: 100%;
+     border: 2px slategray;
+}
+
+#displayRGB {
+
+    width: 65%;
+    height: 40px;
+    background: #FFFFFF;
+    margin-top: 10px;
+    border: 3px solid #000;
+}
+
+.SliderCMYK {
+
+      position:absolute;    
+     left:40%;
+     top:10%;
+     width: 80%;s
+     height: 100%;
+     border: 2px slategray;
+     display:none;     
+}
+
+#displayCMYK {
+    width: 65%;
+    height: 40px;
+    background: #ffffff;
+    margin-top: 10px;
+    border: 3px solid #000;
+}

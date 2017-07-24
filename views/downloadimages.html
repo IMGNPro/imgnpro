@@ -8,6 +8,9 @@
         <link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico"/>
         <script src="../js/google.js"></script>
         <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+        <script src="../js/FileSaver.min.js"></script>
+        <script src="../js/jszip.min.js"></script>
+        <script src="../js/jszip-utils.js"></script>
         <script src="../js/downloadimages.js"></script>
     </head>
     <body>
@@ -35,7 +38,9 @@
         <hr>
         <section id="contenedor">
             <div id= "orderstable" class="tabla">
-                <p class="encabezado">Lista del pedido <span><%= numorder %></span></p>
+                <p class="encabezado">Lista del pedido <span><%= numorder %></span> (<span><a href="#" id ="link1">Descargar todo</a></span>)</p>
+                <span id="spDownloadPercent"></span>
+                <span id="spZipPercent"></span>
                 <table>
                     <tr>
                         <th>Orden</th>
