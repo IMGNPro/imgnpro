@@ -618,12 +618,13 @@ function createfreespec(userid,cb){
       newSpec.userid = userid; 
       newSpec.dpinone = 'none';
       newSpec.background = 'blanco';
+      newSpec.backgrndcolor = '#ffffff';
       newSpec.colormode = 'rgb';
       newSpec.format = 'jpg';
       newSpec.format_ext = 'jpg';
       newSpec.typespec = 'free';
       newSpec.maxfiles = 3;
-
+      newSpec.RGB = "{'r':255,'g':255,'b':255}";
 
       //var specInfos = [];
       //specInfos[0].naturalshadow = 1;
